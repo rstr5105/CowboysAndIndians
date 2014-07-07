@@ -78,14 +78,17 @@ public class WorldMapRenderer {
 		//draw the visible map.
 		int firstTileX = pixelsToTiles(-offsetX);
 		int firstTileY = pixelsToTiles(-offsetY);
+		//Check to make sure the first tiles are within range...IE., BOUNDSCHECK.
 		if (firstTileX < 0){
 			firstTileX = 0;
 			
 		}
+		
 		if (firstTileY < 0){
 			firstTileY = 0;
 		}
 		
+		//set the last tile, and bounds check(ish) once again.
 		int lastTileX = firstTileX + pixelsToTiles(screenWidth) + 1;
 		int lastTileY = firstTileY + pixelsToTiles(screenHeight) + 1;
 		if (lastTileX >= map.getWidth()){
@@ -94,6 +97,7 @@ public class WorldMapRenderer {
 		if (lastTileY >= map.getHeight()){
 			lastTileY = map.getHeight() - 1;
 		}
+		//finally, here we are, drawing the map.
 		for (int y = firstTileY; y <= lastTileY; y++){
 			for(int x = firstTileX; x <= lastTileX; x++){
 				Image image = map.getTile(y, x);
@@ -105,8 +109,7 @@ public class WorldMapRenderer {
 				}
 			}
 		}
-		g.setColor(Color.red);
-		g.drawRect(map.getCenterX(), map.getCenterY(), 64, 64);
+
 		/*
 		//draw Sprites --(really do nothing for now, uncomment when you have unit animations and shit.  
 		 * right now we're just trying to draw the map.)

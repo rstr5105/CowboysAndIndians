@@ -61,17 +61,18 @@ public class World {
         for (int y = 0; y < size_H; y++){
             for (int x = 0; x < size_W; x++){
             	newWorld[y][x] = new Tile().setupTile(TileType.WATER);
-                //fucking check for bounds, only once in this version of code.  Thank GOD!  (y really hate checking bounds.
-                //ORACLE: Do us a favor, make a function for arrays called BoundsCheck() or some such, that does this for us,
-                //and build it into the array type.  It should return a boolean.  This will make everyone's lives easier.(Yes, y Am
-                //That lazy))
-                if ((y == 0 
+                /*
+                 * fucking check for bounds, only once in this version of code.  Thank GOD!  (y really hate checking bounds.
+                 * ORACLE: Do us a favor, make a function for arrays called BoundsCheck() or some such, that does this for us,
+                 * and build it into the array type.  It should return a boolean.  This will make everyone's lives easier.(Yes, y Am
+                 * That lazy))
+                 */
+            	
+            	if ((y == 0 
                 	|| x == 0
                     || y + 1 >= world.length 
                     || x + 1 >= world[0].length)){
                     newWorld[y][x].setupTile(TileType.WATER);
-                    //DEBUG::System.out.println("BOUND DETECTED!\nFlipping Tile: " + y + " : " + x + " to Water!\nOn Pass" + passComplete);
-                    	
                 }
                     	
                 else{
@@ -142,8 +143,7 @@ public class World {
 }
 
 	private Tile[] countNeighbors(Tile[][] world, int x, int y){
-	
-		
+		//Create a Tile Array to store all 8 of our neighbors in.  This makes things so much easier than what I was doing before.
 		Tile[] neighbors = {world[x - 1][y - 1], world[x - 1][y], world[x - 1][y + 1], 
 							world[x][y -1],		 						world[x][y+1], 
 							world[x + 1][y-1],  world[x + 1][y],  world[x + 1][y + 1]};
@@ -190,12 +190,18 @@ public class World {
 	public Tile getTile(int x, int y){
 		return gWorld[x][y];
 	}
+	
 	public void print(){
+		//For the Graphically Challenged, this will print the world to console.   
+		//Really Kinda outdated now that we have a 2D map going.  But, still here for future debugging/other purposes.
 		for(int y = 0; y < size_H; y++){
+			//create a string to hold each line of the map.
 			String mapString = "";
 			for(int x = 0; x < size_W; x++){
+				//add each tilechar to the map.
 				mapString += this.gWorld[y][x].getTileChar();
 			}
+			//print each line.  Lather, Rinse, Repeat until done.
 			System.out.println(mapString);
 		}
 	}

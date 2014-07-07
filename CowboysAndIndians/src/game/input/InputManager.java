@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputManager implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
-
+	//A list of available mouse codes.  
 	public static final int MOUSE_MOVE_LEFT = 0;
 	public static final int MOUSE_MOVE_RIGHT = 1;
 	public static final int MOUSE_MOVE_UP = 2;
@@ -29,8 +29,10 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 	
 	public static final int MOUSE_CODES = 9;
 	
+	//Standard keycodes are all less than 600 except for a few special ed. cases.  Nobody cares about those.
 	public static final int NUM_OF_KEY_CODES = 600;
 	
+	//GameAction[] arrays, these will hold our Key & Mouse Bindings. (Duh!)
 	private GameAction[] keyActions = new GameAction[NUM_OF_KEY_CODES];
 	private GameAction[] mouseActions = new GameAction[MOUSE_CODES];
 	
@@ -51,15 +53,19 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 		comp.addMouseMotionListener(this);
 		comp.addMouseWheelListener(this);
 	
-		//tell focus travesal to take a hike!
+		//tell focus traversal to take a hike!
 		comp.setFocusTraversalKeysEnabled(false);	
 
 	}
 	
 	public void setCursor(Cursor cursor){
+		//sets the cursor to our component.
 		comp.setCursor(cursor);
 	}
 	
+	//Set relative Mouse Mode.  WARNING: On some systems, Robot does not work.  
+	//No I don't know why.
+	//But for this game, it does not really matter.
 	public void setIsRelativeMouseMode(boolean mode){
 		if(mode == isRelativeMouseMode()){
 			return;
@@ -79,25 +85,30 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 		}
 	}
 	
+	//Recenters the Mouse when Relative Mouse Mode is enabled.
 	private synchronized void recenterMouse() {
 		if (robot != null && comp.isShowing()){
 			centerLocation.x = comp.getWidth() / 2;
 			centerLocation.y = comp.getHeight() / 2;
 		}
 	}
-
+	
+	//well, is it?
 	public boolean isRelativeMouseMode(){
 		return (robot != null);
 	}
 	
+	//map a game action to a specified key.  I can see how this would come in handy.
 	public void mapToKey(GameAction action, int keyCode){
 		keyActions[keyCode] = action;
 	}
 	
+	//do the same for the mouse.
 	public void mapToMouse(GameAction action, int mouseCode){
 		mouseActions[mouseCode] = action;
 	}
 	
+	//reset a game action to nothingness. 
 	public void clearActions(GameAction action){
 		for (int i = 0; i < keyActions.length; i++ ){
 			if (keyActions[i] == action){
@@ -113,6 +124,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 		action.reset();
 	}
 	
+	//Return a list of all current keymaps.
 	public List<String> getMaps(GameAction action){
 		ArrayList<String> list = new ArrayList<String>();
 		for(int i = 0; i < keyActions.length; i++){
@@ -128,6 +140,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 		return list;
 	}
 	
+	//Resets ALL actions to nothingness.
 	public void resetAllActions(){
 		for(int i = 0; i < keyActions.length; i++){
 			if(keyActions[i] != null){
@@ -142,10 +155,12 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 		}
 	}
 	
+	//kinda obvious, but return key name.
 	public static String getKeyName(int keyCode){
 		return KeyEvent.getKeyText(keyCode);
 	}
 	
+	//see above, but for mouse.
 	public static String getMouseName(int mouseCode){
 		switch(mouseCode){
 		case MOUSE_MOVE_LEFT: return "Mouse Left";
@@ -161,14 +176,18 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 		}
 	}
 	
+	//Get the mouse X Position.
 	public int getMouseX(){
 		return mousePosition.x;
 	}
 	
+	//get the mouse Y position
 	public int getMouseY(){
 		return mousePosition.y;
 	}
 	
+	//Return the action currently being performed.  
+	//If no action is bound, returns null.
 	private GameAction getKeyAction(KeyEvent e){
 		int keyCode = e.getKeyCode();
 		if (keyCode < keyActions.length){
@@ -179,6 +198,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 		}
 	}
 	
+	//returns the mouse button code for the mouse button pressed.
 	public static int getMouseButtonCode(MouseEvent e){
 		switch(e.getButton()){
 			case MouseEvent.BUTTON1:
@@ -192,6 +212,8 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 		}
 	}
 	
+	//returns the action when a mouse button is pressed.  
+	//If no action mapped, return null.
 	private GameAction getMouseButtonAction(MouseEvent e){
 		int mouseButtonCode = getMouseButtonCode(e);
 		if (mouseButtonCode != -1){
