@@ -1,7 +1,8 @@
 /**######
  * Game.Java
  *@author Robert
- *@version 0.0.1
+ *@version 0.0.2
+ *last edited: 7/06/2014
  *Main Game class, handles the entire game.
  */
 
