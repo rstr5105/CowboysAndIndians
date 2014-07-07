@@ -6,11 +6,16 @@
  */
 
 package game;
-import java.awt.Graphics2D;
-import java.awt.Point;
-
+//Local Imports
 import game.core.GameCore;
-import game.world.*;
+import game.input.GameAction;
+import game.input.InputManager;
+import game.world.World;
+
+//Java Imports
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.Point;
 
 
 public class Game extends GameCore {
@@ -20,10 +25,16 @@ public class Game extends GameCore {
 	private final static int SIZE_W = 256;
 	private World world;
 	private WorldMapRenderer renderer;
+	private InputManager inputManager;
 	
 	
 	private WorldMap map;
 	
+	private GameAction exit;
+	private GameAction scrollMapLeft;
+	private GameAction scrollMapRight;
+	private GameAction scrollMapUp;
+	private GameAction scrollMapDown;
 
 	public static void main(String args[]){
 		new Game().run();
@@ -31,6 +42,7 @@ public class Game extends GameCore {
 	}
 	public void init(){
 		super.init();
+		initInput();
 		//create and start a new Resource Manager....Why?  Who Cares?!
 		ResourceManager rM = new ResourceManager(wm.getFullScreenWindow().getGraphicsConfiguration());
 		world = generateGameWorld(SIZE_H, SIZE_W);
@@ -51,6 +63,25 @@ public class Game extends GameCore {
 	public void draw(Graphics2D g) {
 		renderer.draw(g, map, wm.getWidth(), wm.getHeight());
 		
+	}
+	
+	public void initInput(){
+		
+		exit = new GameAction("exit");
+		
+		inputManager = new InputManager(wm.getFullScreenWindow());
+		inputManager.mapToKey(exit, KeyEvent.VK_ESCAPE);
+		
+	}
+	
+	public void checkInput(long elapsedTime){
+		if (exit.isPressed()){
+			stop();
+		}
+	}
+	
+	public void update(long elapsedTime){
+		checkInput(elapsedTime);
 	}
 	
 	

@@ -265,7 +265,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 			int dx = e.getX() - centerLocation.x;
 			int dy = e.getY() - centerLocation.y;
 			
-			mouseHelper(MOUSE_MOVE_LEFT, MOUSE_MOVE_RIGHT,_dx);
+			mouseHelper(MOUSE_MOVE_LEFT, MOUSE_MOVE_RIGHT, dx);
 			mouseHelper(MOUSE_MOVE_UP, MOUSE_MOVE_DOWN, dy);
 			
 			if(isRelativeMouseMode()){
@@ -273,7 +273,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 			}
 		}
 		mousePosition.x = e.getX();
-		mousePosition.Y = e.getY();
+		mousePosition.y = e.getY();
 	}
 
 	@Override
@@ -290,7 +290,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 			action = mouseActions[positive];
 		}
 		if(action != null){
-			action.press(Math.abs(amount));
+			action.press(Math.abs(delta));
 			action.release();
 		}
 	}
