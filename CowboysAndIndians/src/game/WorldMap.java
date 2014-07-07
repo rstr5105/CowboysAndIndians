@@ -4,6 +4,7 @@ import game.graphicsEngine.Sprite;
 import game.world.World;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.util.LinkedList;
 import java.util.Iterator;
 
@@ -14,8 +15,13 @@ public class WorldMap {
 	
 	private Image[][] tiles;
 	private LinkedList<Sprite> sprites;
+	private Point centerPoint;
 	
 	public WorldMap(World world, int height, int width){
+		centerPoint = new Point();
+		centerPoint.x = width / 2;
+		centerPoint.y = height / 2;
+		
 		tiles = new Image[height][width];
 		for(int y = 0; y < height; y++){
 			for (int x = 0; x < width; x++){
@@ -74,5 +80,18 @@ public class WorldMap {
 	public void setHeight(int height) {
 	}
 	
+	public int getCenterX(){
+		return centerPoint.x;
+	}
+	
+	public int getCenterY(){
+		return centerPoint.y;
+	}
+	public void setCenterX(int delta){
+		centerPoint.x +=  (delta * 64);
+	}
+	public void setCenterY(int delta){
+		centerPoint.y += (delta * 64);
+	}
 	
 }

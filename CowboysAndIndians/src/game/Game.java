@@ -68,8 +68,17 @@ public class Game extends GameCore {
 	public void initInput(){
 		
 		exit = new GameAction("exit");
+		scrollMapLeft = new GameAction("Scroll Map Left");
+		scrollMapRight = new GameAction("Scroll Map Right");
+		scrollMapUp = new GameAction("Scroll Map UP");
+		scrollMapDown = new GameAction("Scroll Map Down");
 		
 		inputManager = new InputManager(wm.getFullScreenWindow());
+		inputManager.mapToKey(scrollMapLeft, KeyEvent.VK_LEFT);
+		inputManager.mapToKey(scrollMapRight, KeyEvent.VK_RIGHT);
+		inputManager.mapToKey(scrollMapUp, KeyEvent.VK_UP);
+		inputManager.mapToKey(scrollMapDown, KeyEvent.VK_DOWN);
+		
 		inputManager.mapToKey(exit, KeyEvent.VK_ESCAPE);
 		
 	}
@@ -77,6 +86,19 @@ public class Game extends GameCore {
 	public void checkInput(long elapsedTime){
 		if (exit.isPressed()){
 			stop();
+		}
+		
+		if(scrollMapLeft.isPressed()){
+			map.setCenterX(-1);
+		}
+		if(scrollMapRight.isPressed()){
+			map.setCenterX(1);
+		}
+		if(scrollMapUp.isPressed()){
+			map.setCenterY(-1);
+		}
+		if(scrollMapDown.isPressed()){
+			map.setCenterY(1);
 		}
 	}
 	
