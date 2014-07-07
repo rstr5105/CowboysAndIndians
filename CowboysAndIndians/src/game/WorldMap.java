@@ -99,6 +99,12 @@ public class WorldMap {
 	public void setCenterY(int delta){
 		centerPoint.y += (delta);
 	}
+	public void resetCenterX(int x){
+		centerPoint.x = x;
+	}
+	public void resetCenterY(int y){
+		centerPoint.y = y;
+	}
 	
 }
 //###End WorldMap.java

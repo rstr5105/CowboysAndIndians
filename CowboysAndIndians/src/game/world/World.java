@@ -101,7 +101,7 @@ public class World {
                     }
                     
                     //apply rule 2:
-                    else if((neighborTypes[TileType.GRASS.ordinal()] > 6)
+                    else if((neighborTypes[TileType.GRASS.ordinal()] + neighborTypes[TileType.WATER.ordinal()] > 6)
                     		&& (stepsDone < NUM_OF_STEPS -1)){
                     	//DEBUG::System.out.println("Not Enough Dirt! Flipping Tile: " + y + ":" + x +" To Dirt!\nOn Pass" + passComplete);
                     	newWorld[y][x].setupTile(TileType.DIRT);
