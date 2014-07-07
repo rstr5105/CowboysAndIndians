@@ -21,7 +21,7 @@ import java.awt.Point;
 public class Game extends GameCore {
 	
 	private Point cache = new Point();
-	private final static int SIZE_H = 64;
+	private final static int SIZE_H = 256;
 	private final static int SIZE_W = 256;
 	private World world;
 	private WorldMapRenderer renderer;
@@ -68,10 +68,10 @@ public class Game extends GameCore {
 	public void initInput(){
 		
 		exit = new GameAction("exit");
-		scrollMapLeft = new GameAction("Scroll Map Left");
-		scrollMapRight = new GameAction("Scroll Map Right");
-		scrollMapUp = new GameAction("Scroll Map UP");
-		scrollMapDown = new GameAction("Scroll Map Down");
+		scrollMapLeft = new GameAction("Scroll Map Left", GameAction.DETECT_INITAL_PRESS_ONLY);
+		scrollMapRight = new GameAction("Scroll Map Right", GameAction.DETECT_INITAL_PRESS_ONLY);
+		scrollMapUp = new GameAction("Scroll Map UP", GameAction.DETECT_INITAL_PRESS_ONLY);
+		scrollMapDown = new GameAction("Scroll Map Down", GameAction.DETECT_INITAL_PRESS_ONLY);
 		
 		inputManager = new InputManager(wm.getFullScreenWindow());
 		inputManager.mapToKey(scrollMapLeft, KeyEvent.VK_LEFT);
@@ -89,16 +89,20 @@ public class Game extends GameCore {
 		}
 		
 		if(scrollMapLeft.isPressed()){
-			map.setCenterX(-1);
+		
+				map.setCenterX(WorldMapRenderer.tilesToPixels(-2));
+			
 		}
 		if(scrollMapRight.isPressed()){
-			map.setCenterX(1);
+			
+				map.setCenterX(WorldMapRenderer.tilesToPixels(2));
+			
 		}
 		if(scrollMapUp.isPressed()){
-			map.setCenterY(-1);
+			map.setCenterY(WorldMapRenderer.tilesToPixels(-2));
 		}
 		if(scrollMapDown.isPressed()){
-			map.setCenterY(1);
+			map.setCenterY(WorldMapRenderer.tilesToPixels(2));
 		}
 	}
 	

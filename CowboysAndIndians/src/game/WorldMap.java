@@ -1,3 +1,8 @@
+/*
+ * WorldMap.Java
+ * @author Robert
+ * Version 1
+ */
 package game;
 
 import game.graphicsEngine.Sprite;
@@ -7,6 +12,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 
@@ -19,8 +25,8 @@ public class WorldMap {
 	
 	public WorldMap(World world, int height, int width){
 		centerPoint = new Point();
-		centerPoint.x = width / 2;
-		centerPoint.y = height / 2;
+		centerPoint.x = WorldMapRenderer.tilesToPixels(width) / 2;
+		centerPoint.y = WorldMapRenderer.tilesToPixels(height) / 2;
 		
 		tiles = new Image[height][width];
 		for(int y = 0; y < height; y++){
@@ -88,10 +94,11 @@ public class WorldMap {
 		return centerPoint.y;
 	}
 	public void setCenterX(int delta){
-		centerPoint.x +=  (delta * 64);
+		centerPoint.x +=  (delta);
 	}
 	public void setCenterY(int delta){
-		centerPoint.y += (delta * 64);
+		centerPoint.y += (delta);
 	}
 	
 }
+//###End WorldMap.java

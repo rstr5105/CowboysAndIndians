@@ -1,9 +1,15 @@
+/**
+ * WorldMapRenderer.java
+ *@author Robert
+ * renders a worldMap to a displayable graphic
+ */
 package game;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
 
 public class WorldMapRenderer {
+	
 	private static final int TILE_SIZE = 64;
 	/**
 	 * The Size in Bits of Tile.
@@ -31,20 +37,20 @@ public class WorldMapRenderer {
 		int mapHeight = tilesToPixels(map.getHeight());
 		
 		//Not quite sure how to implement this yet.
-		int offsetX = ((screenWidth / 2) - (map.getCenterX() / 2));
-		//offsetX = Math.min(offsetX, 0);
-		//offsetX = Math.max(offsetX, screenWidth - mapWidth);
+		int offsetX = ((screenWidth / 2) - (map.getCenterX()));
+		offsetX = Math.min(offsetX, 0);
+		offsetX = Math.max(offsetX, screenWidth - mapWidth);
 		
 		
 		
 		//get offsetY for drawing Sprites.
-		int offsetY = ((screenHeight / 2) - (map.getCenterY() / 2));
-		//offsetY = Math.min(offsetY, 0);
-		//offsetY = Math.max(offsetY, screenHeight - mapHeight);
+		int offsetY = ((screenHeight / 2) - (map.getCenterY()));
+		offsetY = Math.min(offsetY, 0);
+		offsetY = Math.max(offsetY, screenHeight - mapHeight);
 			
 		
 		//draw the visible map.
-		int firstTileX = pixelsToTiles(-offsetX);
+		int firstTileX = pixelsToTiles(- offsetX);
 		int firstTileY = pixelsToTiles(-offsetY);
 		if (firstTileX < 0){
 			firstTileX = 0;
@@ -90,4 +96,10 @@ public class WorldMapRenderer {
 		}
 		*/
 	}
+
+	public static int getTileSize() {
+		return TILE_SIZE;
+	}
 }
+
+//###End WorldMap.java###
