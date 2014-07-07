@@ -111,7 +111,7 @@ public class World {
                     
                     //apply rule 3:
                     else if ((neighborTypes[TileType.GRASS.ordinal()] + neighborTypes[TileType.DIRT.ordinal()]  > 7) 
-                    		&& (stepsDone < NUM_OF_STEPS - 1)) {
+                    		&& (stepsDone <= NUM_OF_STEPS - 2)) {
                     	//DEBUG::System.out.println("Not Enough Internal Water! Flipping Tile: " + y + ":" + x +" To Water!\nOn Pass" + passComplete);
                         newWorld[y][x].setupTile(TileType.WATER);
                         

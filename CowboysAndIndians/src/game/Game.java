@@ -35,6 +35,11 @@ public class Game extends GameCore {
 	private GameAction scrollMapRight;
 	private GameAction scrollMapUp;
 	private GameAction scrollMapDown;
+	
+	private GameAction mouseScrollMapLeft;
+	private GameAction mouseScrollMapRight;
+	private GameAction mouseScrollMapUp;
+	private GameAction mouseScrollMapDown;
 
 	public static void main(String args[]){
 		new Game().run();
@@ -73,6 +78,11 @@ public class Game extends GameCore {
 		scrollMapUp = new GameAction("Scroll Map UP", GameAction.DETECT_INITAL_PRESS_ONLY);
 		scrollMapDown = new GameAction("Scroll Map Down", GameAction.DETECT_INITAL_PRESS_ONLY);
 		
+		mouseScrollMapLeft = new GameAction("Mouse Scroll Map Up");
+		mouseScrollMapRight = new GameAction("Mouse Scroll Map Right");
+		mouseScrollMapUp = new GameAction("Mouse Scroll Map Up");
+		mouseScrollMapDown = new GameAction("Mouse Scroll Map Down");
+		
 		inputManager = new InputManager(wm.getFullScreenWindow());
 		inputManager.mapToKey(scrollMapLeft, KeyEvent.VK_LEFT);
 		inputManager.mapToKey(scrollMapRight, KeyEvent.VK_RIGHT);
@@ -86,6 +96,22 @@ public class Game extends GameCore {
 	public void checkInput(long elapsedTime){
 		if (exit.isPressed()){
 			stop();
+		}
+		
+		if (inputManager.getMouseX() == 0){
+			map.setCenterX(-5);
+		}
+		
+		if (inputManager.getMouseX() == wm.getWidth() - 1){
+			map.setCenterX(5);
+		}
+		
+		if (inputManager.getMouseY() == 0){
+			map.setCenterY(-5);
+		}
+		
+		if (inputManager.getMouseY() == wm.getHeight() - 1){
+			map.setCenterY(5);
 		}
 		
 		if(scrollMapLeft.isPressed()){
