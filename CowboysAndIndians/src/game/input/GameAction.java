@@ -7,4 +7,14 @@ public class GameAction {
 		
 	}
 
+	public void press() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void release() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

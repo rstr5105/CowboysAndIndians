@@ -38,6 +38,7 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 	private Point centerLocation;
 	private Component comp;
 	private Robot robot;
+	private boolean isRecentering;
 	
 	public InputManager(Component comp){
 		this.comp = comp;
@@ -202,69 +203,95 @@ public class InputManager implements KeyListener, MouseListener, MouseMotionList
 	}
 	
 	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void keyPressed(KeyEvent e){
+		GameAction action = getKeyAction(e);
+		if(action != null){
+			action.press();
+		}
+		e.consume();
 	}
-
+	
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyEvent e){
+		GameAction action = getKeyAction(e);
+		if(action != null){
+			action.release();
+		}
+		e.consume();
 	}
-
+	
+	@Override
+	public void keyTyped(KeyEvent e){
+		e.consume();
+	}
+	
+	public void mousePressed(MouseEvent e){
+		GameAction action =getMouseButtonAction(e);
+		if(action != null){
+			action.press();
+		}
+	}
+	
+	public void mouseReleased(MouseEvent e){
+		GameAction action = getMouseButtonAction(e);
+		if(action != null){
+			action.release();
+		}
+	}
+	
+	public void mouseClicked(MouseEvent e){
+		//skip!!
+	}
+	
+	public void mouseEntered(MouseEvent e){
+		mouseMoved(e);
+	}
+	
+	public void mouseExited(MouseEvent e){
+		mouseMoved(e);
+	}
+	public void mouseDragged(MouseEvent e){
+		mouseMoved(e);
+	}
+	
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(isRecentering &&
+			centerLocation.x == e.getX() &&
+			centerLocation.y == e.getY()){
+			isRecentering = false;
+		}
+		else{
+			int dx = e.getX() - centerLocation.x;
+			int dy = e.getY() - centerLocation.y;
+			
+			mouseHelper(MOUSE_MOVE_LEFT, MOUSE_MOVE_RIGHT,_dx);
+			mouseHelper(MOUSE_MOVE_UP, MOUSE_MOVE_DOWN, dy);
+			
+			if(isRelativeMouseMode()){
+				recenterMouse();
+			}
+		}
+		mousePosition.x = e.getX();
+		mousePosition.Y = e.getY();
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		mouseHelper(MOUSE_MOVE_UP, MOUSE_MOVE_DOWN, e.getWheelRotation());
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	private void mouseHelper(int negative, int positive, int delta) {
+		GameAction action;
+		if(delta < 0){
+			action = mouseActions[negative];
+		}
+		else{
+			action = mouseActions[positive];
+		}
+		if(action != null){
+			action.press(Math.abs(amount));
+			action.release();
+		}
 	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
