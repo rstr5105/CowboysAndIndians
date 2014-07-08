@@ -77,7 +77,7 @@ public class World {
                     	
                 else{
                     //Count Our Neighbors, so we can apply some rules.
-                    Tile[] neighbors = countNeighbors(world, y, x);
+                    Tile[] neighbors = getNeighbors(world, y, x);
  
                     //store our neighborTypes as Integers so we can sort them..
                     int neighborTypes[] = new int[world[0][0].getNumOfTypes()];
@@ -142,7 +142,7 @@ public class World {
 	return newWorld;
 }
 
-	private Tile[] countNeighbors(Tile[][] world, int x, int y){
+	private Tile[] getNeighbors(Tile[][] world, int x, int y){
 		//Create a Tile Array to store all 8 of our neighbors in.  This makes things so much easier than what I was doing before.
 		Tile[] neighbors = {world[x - 1][y - 1], world[x - 1][y], world[x - 1][y + 1], 
 							world[x][y -1],		 						world[x][y+1], 
