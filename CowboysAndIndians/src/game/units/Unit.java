@@ -25,10 +25,14 @@ public class Unit {
 	private float dy;
 	
 	private UnitSprite sprite;
-	
 	private Point destination;
 	
+	private float lastVelocityX;
+	private float lastVelocityY;
+	
 	public void update(long elapsedTime){
+		
+	
 		if(getVelocityX() < 0){
 		
 		}
@@ -43,20 +47,25 @@ public class Unit {
 		else if (getVelocityY() > 0){
 			
 		}
-		else if(getState() == STATE_DYING && newAnim == left){
+		else if(getState() == STATE_DYING){
 			
 		}
-		else if(getState() == STATE_DYING && newAnim == right){
+		else if(getState() == STATE_DYING){
 			
 		}
-		else if(getState() == STATE_DYING && newAnim == up){
-		
+		else if(getState() == STATE_DYING){
+			
 		}
-		else if(getState() == STATE_DYING && newAnim == down){
 		
+		
+		else if(getState() == STATE_DYING && lastVelocityY < 0){
+			//do stuff
+		}
+		
+		lastVelocityX = getVelocityX();
+		lastVelocityY = getVelocityY();
+	
 	}
-	
-	
 	public float getMaxSpeed(){
 		return maxSpeed;
 	}
