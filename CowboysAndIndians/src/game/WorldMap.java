@@ -10,9 +10,8 @@ import game.world.World;
 
 import java.awt.Image;
 import java.awt.Point;
-import java.util.LinkedList;
 import java.util.Iterator;
-import java.util.TreeMap;
+import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 

@@ -47,13 +47,13 @@ public class Unit {
 		else if (getVelocityY() > 0){
 			
 		}
-		else if(getState() == STATE_DYING){
+		else if(getState() == STATE_DYING && lastVelocityX > 0){
 			
 		}
-		else if(getState() == STATE_DYING){
+		else if(getState() == STATE_DYING && lastVelocityX < 0){
 			
 		}
-		else if(getState() == STATE_DYING){
+		else if(getState() == STATE_DYING && lastVelocityY > 0){
 			
 		}
 		
@@ -123,6 +123,10 @@ public class Unit {
 	}
 	public void setDestination(Point destination){
 		this.destination = destination;
+	}
+	
+	public UnitSprite getSprite(){
+		return sprite;
 	}
 	
 }

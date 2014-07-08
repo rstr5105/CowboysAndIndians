@@ -36,6 +36,9 @@ public abstract class UnitSprite extends Sprite {
 
 	public void update(long elapsedTime){
 		Animation newAnim = anim;
+		if(newAnim != null){
+			newAnim.start();
+		}
 		
 	}
 }

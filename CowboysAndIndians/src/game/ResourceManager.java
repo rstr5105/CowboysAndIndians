@@ -3,12 +3,10 @@ package game;
 import java.awt.GraphicsConfiguration;
 import java.awt.Image;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import game.graphicsEngine.Sprite;
 import game.world.*;
 
 
