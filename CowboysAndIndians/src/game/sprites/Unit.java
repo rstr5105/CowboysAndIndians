@@ -1,9 +1,10 @@
 package game.sprites;
 
-import java.lang.reflect.Constructor;
-
 import game.graphicsEngine.Animation;
 import game.graphicsEngine.Sprite;
+
+import java.awt.Point;
+import java.lang.reflect.Constructor;
 
 /*Unit.java
  * @author Robert
@@ -27,6 +28,7 @@ public abstract class Unit extends Sprite {
 	private Animation dyingRight;
 	private Animation dyingUp;
 	private Animation dyingDown;
+	private Point destination;
 	
 	private int state;
 	private int stateTime;
@@ -71,6 +73,11 @@ public abstract class Unit extends Sprite {
 		}
 	}
 	
+	private void moveTowardsDestination(Point destination2) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public int getState(){
 		return state;
 	}
@@ -91,7 +98,7 @@ public abstract class Unit extends Sprite {
 	}
 	
 	public void collideHorizontal(){
-		setvelocityX(0);
+		setVelocityX(0);
 	}
 	
 	public void collideVertical(){
@@ -100,18 +107,18 @@ public abstract class Unit extends Sprite {
 	
 	public void update(long elapsedTime){
 		Animation newAnim = anim;
-		if(getVelocityX < 0){
+		if(getVelocityX() < 0){
 			anim = left;
 		}
 		
-		else if (getVelocityY < 0){
+		else if (getVelocityY() < 0){
 			anim = up;
 		}
 		
-		else if (getVelocityX > 0 ){
+		else if (getVelocityX() > 0 ){
 			anim = right;
 		}
-		else if (getVelocityY > 0){
+		else if (getVelocityY() > 0){
 			anim = down;
 		}
 		else if(getState() == STATE_DYING && newAnim == left){
