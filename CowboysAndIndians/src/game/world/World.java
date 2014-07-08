@@ -142,11 +142,11 @@ public class World {
 	return newWorld;
 }
 
-	private Tile[] getNeighbors(Tile[][] world, int x, int y){
-		//Create a Tile Array to store all 8 of our neighbors in.  This makes things so much easier than what I was doing before.
-		Tile[] neighbors = {world[x - 1][y - 1], world[x - 1][y], world[x - 1][y + 1], 
-							world[x][y -1],		 						world[x][y+1], 
-							world[x + 1][y-1],  world[x + 1][y],  world[x + 1][y + 1]};
+	private Tile[] getNeighbors(Tile[][] world, int y, int x){
+		//Create a Tile Arrax to store all 8 of our neighbors in.  This makes things so much easier than what I was doing before.
+		Tile[] neighbors = {world[y - 1][x - 1], world[y - 1][x], world[y - 1][x + 1], 
+							world[y][x -1],		 						world[y][x+1], 
+							world[y + 1][x-1],  world[y + 1][x],  world[y + 1][x + 1]};
 		return neighbors;
 	}		
 				
