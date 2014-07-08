@@ -1,6 +1,6 @@
 package game.world;
 
-import game.graphicsEngine.sprites.Unit;
+import game.units.Unit;
 
 
 public enum TileType {
