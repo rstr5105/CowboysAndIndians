@@ -1,9 +1,12 @@
 package game.graphicsEngine;
 
 import java.awt.Image;
+import java.awt.Point;
 
 public class Sprite {
 	protected Animation anim;
+	
+	private Point pos;
 
 	
 	public Sprite(Animation anim){
@@ -30,6 +33,16 @@ public class Sprite {
 	}
 	public Object clone(){
 		return new Sprite(anim);
+	}
+
+	public int getX() {
+		// TODO Auto-generated method stub
+		return pos.x;
+	}
+
+	public int getY() {
+		// TODO Auto-generated method stub
+		return pos.y;
 	}
 	
 }

@@ -16,7 +16,7 @@ public abstract class GameCore {
 	protected static final int FONT_SIZE = 24;
 	
 	private static final DisplayMode[] POSSIBLE_MODES={
-		//new DisplayMode(800, 600, 32, 0),
+		new DisplayMode(800, 600, 32, 0),
 		new DisplayMode(1366, 768, 32, 0)
 	};
 

@@ -62,6 +62,9 @@ public class Game extends GameCore {
 		//load our resources!
 		renderer = new WorldMapRenderer();
 		map = new WorldMap(world, SIZE_H, SIZE_W);
+		//initialize the renderer at the center of the map(Or of course, whereever the hell we want to really)
+		renderer.setRenderCenterX(wm.getWidth() / 2 - map.getCenterX());
+		renderer.setRenderCenterY(wm.getHeight() / 2 - map.getCenterY());
 		
 		
 	}
@@ -74,9 +77,11 @@ public class Game extends GameCore {
 	}
 	@Override
 	public void draw(Graphics2D g) {
-		String string = WorldMapRenderer.pixelsToTiles(map.getCenterX()) + " | " + WorldMapRenderer.pixelsToTiles(map.getCenterY());
+		String string = WorldMapRenderer.pixelsToTiles(map.getCenterX()) + " | " + WorldMapRenderer.pixelsToTiles(map.getCenterY()) 
+			+ "\n" + renderer.getRenderCenterX() + "|" + renderer.getRenderCenterY();
+		
 		renderer.draw(g, map, wm.getWidth(), wm.getHeight());
-		g.drawString(string, wm.getWidth() / 2 - string.length() / 2, wm.getHeight() / 2);
+		g.drawString(string, 0, FONT_SIZE);
 		
 	}
 	
@@ -108,39 +113,38 @@ public class Game extends GameCore {
 		
 		//Mouse Scrolling Implemented Here.
 		if (inputManager.getMouseX() == 0){
-
-			map.setCenterX(-5);
-		}
+			renderer.setRenderCenterX(renderer.getRenderCenterX() + 5);		
+			}
 		
 		//More Mouse Scrolling
 		if (inputManager.getMouseX() == wm.getWidth() - 1){
-			map.setCenterX(5);
+			renderer.setRenderCenterX(renderer.getRenderCenterX() - 5);
 		}
 		
 		//And Some More.
 		if (inputManager.getMouseY() == 0){
-			map.setCenterY(-5);
+			renderer.setRenderCenterY(renderer.getRenderCenterY() + 5);;
 		}
 		
 		//And Finally, The Last Mouse Scroll.
 		if (inputManager.getMouseY() == wm.getHeight() - 1){
-			map.setCenterY(5);
+			renderer.setRenderCenterY(renderer.getRenderCenterY() - 5);;
 		}
 		
 		//Keyboard Scrolling.
 		if(scrollMapLeft.isPressed()){
-			map.setCenterX(WorldMapRenderer.tilesToPixels(-3));
+			renderer.setRenderCenterX(renderer.getRenderCenterX() + WorldMapRenderer.tilesToPixels(3));
 		}
 		
 		if(scrollMapRight.isPressed()){
-			map.setCenterX(WorldMapRenderer.tilesToPixels(3));
+			renderer.setRenderCenterX(renderer.getRenderCenterX() - WorldMapRenderer.tilesToPixels(3));
 		}
 		if(scrollMapUp.isPressed()){
-			map.setCenterY(WorldMapRenderer.tilesToPixels(-3));
+			renderer.setRenderCenterY(renderer.getRenderCenterY() + WorldMapRenderer.tilesToPixels(3));
 		}
 		
 		if(scrollMapDown.isPressed()){
-			map.setCenterY(WorldMapRenderer.tilesToPixels(3));
+			renderer.setRenderCenterY(renderer.getRenderCenterY() - WorldMapRenderer.tilesToPixels(3));
 		}
 		//End of Keyboard Scrolling.
 		//More Actions to Go Here.
